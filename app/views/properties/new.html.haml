@@ -1,0 +1,66 @@
+%section.container.mx-auto.mt-8
+  %div.bg-white.rounded-lg.shadow-lg.p-6.max-w-lg.mx-auto
+    %h1.text-3xl.font-bold.text-center.mb-6 Editar Propiedad
+
+    = form_with model: @property, local: true, class: "w-full" do |form|
+      - if @property.errors.any?
+        .bg-red-100.text-red-700.p-4.mb-4.rounded-md
+          %h2.text-lg.font-semibold Errores
+          %ul
+            - @property.errors.full_messages.each do |message|
+              %li= message
+
+      %div.mt-4
+        = form.label :address, class: "block text-sm font-medium text-gray-700"
+        = form.text_field :address, class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required: true
+
+      %div.mt-4
+        = form.label :comuna_id, "Comuna", class: "block text-sm font-medium text-gray-700"
+        = form.select :comuna_id, options_from_collection_for_select(@comunas, :id, :name), { prompt: "Seleccione una comuna" }, { class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" }
+
+      %div.mt-4
+        = form.label :price, class: "block text-sm font-medium text-gray-700"
+        = form.number_field :price, step: "any", class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required: true
+
+      %div.mt-4
+        = form.label :currency, class: "block text-sm font-medium text-gray-700"
+        = form.select :currency, ['CLP', 'USD'], {}, class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required: true
+
+      %div.mt-4
+        = form.label :area, class: "block text-sm font-medium text-gray-700"
+        = form.number_field :area, step: "any", class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required: true
+
+      %div.mt-4
+        = form.label :bedrooms, class: "block text-sm font-medium text-gray-700"
+        = form.number_field :bedrooms, class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required: true
+
+      %div.mt-4
+        = form.label :bathrooms, class: "block text-sm font-medium text-gray-700"
+        = form.number_field :bathrooms, class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required: true
+
+      %div.mt-4
+        = form.label :property_type, class: "block text-sm font-medium text-gray-700"
+        = form.select :property_type, ['Arriendo', 'Venta'], {}, class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", required: true
+
+      %div.mt-4
+        = form.label :description, class: "block text-sm font-medium text-gray-700"
+        = form.text_area :description, class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", rows: 4
+
+      %div.mt-4
+        = form.label :photos, class: "block text-sm font-medium text-gray-700"
+        = form.file_field :photos, multiple: true, accept: "image/png, image/jpg, image/jpeg", class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", direct_upload: true
+
+      %div.mt-4
+        = form.label :latitude, "Latitud", class: "block text-sm font-medium text-gray-700"
+        = form.text_field :latitude, placeholder: "Ejemplo: 41.40338", class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+
+      %div.mt-4
+        = form.label :longitude, "Longitud", class: "block text-sm font-medium text-gray-700"
+        = form.text_field :longitude, placeholder: "Ejemplo: 2.17403", class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+
+      %div.mt-6.flex.justify-between
+        = form.submit "Guardar propiedad", class: "px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        - if @property.new_record?
+          = link_to 'Cancelar', properties_path, class: "px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        - else
+          = link_to 'Cancelar', property_path(@property.id), class: "px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"

@@ -1,0 +1,25 @@
+.flex.h-screen
+  .w-full.max-w-xs.m-auto.bg-indigo-100.rounded.p-5
+    %header
+      %img.w-20.mx-auto.mb-5{src: "https://img.icons8.com/?size=256&id=rnwtSv4H3pXk&format=png"}
+
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = devise_error_messages!
+
+      %div.mb-4
+        %label.block.mb-2.text-indigo-500{ for: "email" } Correo
+        = f.email_field :email, class: "w-full p-2 text-gray-900 border-b-2 border-indigo-500 outline-none focus:bg-gray-300", autofocus: true
+
+      %div.mb-4
+        %label.block.mb-2.text-indigo-500{ for: "password" } Contraseña
+        = f.password_field :password, class: "w-full p-2 text-gray-900 border-b-2 border-indigo-500 outline-none focus:bg-gray-300"
+
+      %div.mb-4
+        %label.block.mb-2.text-indigo-500{ for: "password_confirmation" } Confirmar Contraseña
+        = f.password_field :password_confirmation, class: "w-full p-2 text-gray-900 border-b-2 border-indigo-500 outline-none focus:bg-gray-300"
+
+      %div.mt-4
+        = f.submit "Registrarse", class: "w-full bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded-full text-center", onclick: "return confirm('¿Estás seguro de que deseas registrarte?');"
+
+    %footer.mt-4
+      %a.text-indigo-700.hover:text-pink-700.text-sm.float-left{ href: new_user_session_path } ¿Ya tienes una cuenta? Inicia sesión

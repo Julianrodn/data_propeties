@@ -1,0 +1,55 @@
+%section.container.mx-auto.mt-8
+  %div.bg-white.rounded-lg.shadow-lg.p-6.max-w-sm.mx-auto
+    %h1.text-2xl.font-bold.text-center.mb-4 Detalles de la Propiedad
+
+    - if @property.photos.attached?
+      = image_tag @property.photos.first, class: 'w-full h-50 object-cover rounded-lg'
+    - else
+      %div.w-full.h-50.bg-gray-200.flex.items-center.justify-center.text-gray-500.rounded-lg
+        Sin foto disponible
+
+    %div.mt-4
+      %h2.text-lg.font-semibold= @property.address
+      %p.text-gray-600.mt-1= "#{@property.comuna.name}"
+
+    %div.mt-2
+      %p.text-sm.font-semibold Precio original: 
+      %p.text-gray-800.text-sm= "#{@property.price} #{@property.currency}"
+
+      - if @converted_price.present?
+        %p.text-sm.font-semibold Precio convertido: 
+        %p.text-gray-800.text-sm= "#{@converted_price} #{ @property.currency == 'CLP' ? 'USD' : 'CLP' }"
+      - else
+        %p.text-gray-500.text-sm No se pudo obtener el valor del dólar para la conversión.
+
+    %div.mt-2
+      %p.text-sm.font-semibold Área: 
+      %p.text-gray-800.text-sm= "#{@property.area} m²"
+
+    %div.mt-2
+      %p.text-sm.font-semibold Habitaciones: 
+      %p.text-gray-800.text-sm= @property.bedrooms
+      %p.text-sm.font-semibold Baños: 
+      %p.text-gray-800.text-sm= @property.bathrooms
+
+    %div.mt-2
+      %p.text-sm.font-semibold Tipo de propiedad: 
+      %p.text-gray-800.text-sm= @property.property_type
+
+    %div.mt-4
+      %h3.text-sm.font-semibold Descripción:
+      - if @property.description.present?
+        %p.text-gray-700.mt-2= @property.description
+      - else
+        %p.text-gray-500.mt-2 No hay descripción disponible.
+    %div
+      = js_map [{ latitude: 37.7829, longitude: 122.4190 }]
+
+    %div.mt-4.flex.justify-between
+      - if user_signed_in? && @property.user == current_user
+        = link_to 'Editar propiedad', edit_property_path(@property), class: 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm'
+        = button_to 'Eliminar', property_path(@property), method: :delete, onclick: "return confirm('¿Estás seguro de que deseas eliminar esta propiedad?');", class: 'px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-sm'
+      - if user_signed_in?
+        = link_to 'Volver', properties_path, class: 'px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 text-sm'
+      - else
+        = link_to 'Volver', root_path, class: 'px-4 py-2 bg-gray-300 text-black rounded hover:bg-gray-400 text-sm'

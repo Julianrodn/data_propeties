@@ -40,6 +40,27 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+#Map
+gem "mapkick-rb", "~> 0.2.0"
+
+# For authentication
+gem 'devise'
+
+# Validations for Active Storage
+gem 'active_storage_validations'
+
+# Use HAML instead of ERB
+gem 'haml-rails'
+
+# Efficient pagination
+gem 'kaminari'
+
+# Consume the currency exchange API
+gem 'httparty'
+
+# Styling with Tailwind CSS
+gem 'tailwindcss-rails'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -57,7 +78,10 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'shoulda-matchers'
+  gem 'faker'
 end

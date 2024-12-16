@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comuna: one
+  user: one
+  price: 9.99
+  address: MyString
+  latitude: 9.99
+  longitude: 9.99
+  description: MyText
+  property_type: MyString
+
+two:
+  comuna: two
+  user: two
+  price: 9.99
+  address: MyString
+  latitude: 9.99
+  longitude: 9.99
+  description: MyText
+  property_type: MyString
