@@ -43,7 +43,7 @@
       - else
         %p.text-gray-500.mt-2 No hay descripción disponible.
     %div
-      = js_map [{ latitude: 37.7829, longitude: 122.4190 }]
+      = js_map [{ latitude: @property.latitude, longitude: @property.longitude }]
 
     %div.mt-4.flex.justify-between
       - if user_signed_in? && @property.user == current_user
